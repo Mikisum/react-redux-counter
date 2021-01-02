@@ -5,23 +5,24 @@ import * as actions from './redux/actions';
 
 // const saga = createSagaMiddleware();
 
-function App({ count, increment, decrement, reset  }) {
-  
-console.log()
+function App({counter, disabled, increment, decrement, reset }) {
+  console.log(counter)
   return (
     <div className="App">
-      <h2 className='title'>счетчик: {count}<span id='counter'></span></h2>
+      <h2 className='title'>счетчик: {counter}<span id='counter'></span></h2>
       <div className='group-buttons'>
-        <button onClick={increment}><span id='inc'>+ ({count+1})</span></button>
-        <button onClick={decrement}><span id='dec'>- ({count-1})</span></button>
-        <button onClick={reset}><span>сброс</span></button>
+        <button disabled={disabled} onClick={increment}><span>+ ({counter+1})</span></button>
+        <button disabled={disabled} onClick={decrement}><span>- ({counter-1})</span></button>
+        <button disabled={disabled} onClick={reset}><span>сброс</span></button>
+        {/* <button ><span>сменить фон</span></button> */}
       </div>
     </div>
   );
 }
 const mapStateToProps = (state) => {
   return {
-    count: state
+    counter: state.counterReducer,
+    disabled: state.buttonsReducer
   }
 };
 
