@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import { CHANGE_BACKGROUND, DECREMENT, DISABLE_BUTTONS, ENABLE_BUTTONS, HIDE_LOADER, INCREMENT, RESET, SHOW_LOADER } from "./types"
+import { REQUEST_BACKGROUND, DECREMENT, DISABLE_BUTTONS, ENABLE_BUTTONS, INCREMENT, RESET, REQUEST_BACKGROUND_SUCCESS, REQUEST_BACKGROUND_FAILED } from "./types"
 
 function counterReducer(state = 0, action) {
   if(action.type === INCREMENT){
@@ -12,10 +12,6 @@ function counterReducer(state = 0, action) {
   return state
 }
 
-// const initialButtonsState = {
-//   disabled: false
-// }
-
 function buttonsReducer(state = false, action) {
   switch (action.type) {
     case ENABLE_BUTTONS: 
@@ -25,21 +21,30 @@ function buttonsReducer(state = false, action) {
     default: return state;
   }
 }
-
-function backgroundReducer(state = '', action) {
-  if(action.type === CHANGE_BACKGROUND) {
-    return state = action.payload;
-  }
-  return state
+const initialBackgroundState = {
+  url: 'https://live.staticflickr.com/65535/50757525423_f0886331e0_h.jpg',
+  loading: false,
+  error: false
 }
 
-function loadingReducer(state = false, action) {
-  switch (action.type) {
-    case SHOW_LOADER: 
-      return state= true;
-    case HIDE_LOADER: 
-      return state=false  
-    default: return state;
+function backgroundReducer(state = initialBackgroundState, action) {
+  switch(action.type){
+    case REQUEST_BACKGROUND:
+      return { url: '',
+              loading: true,
+              error: false
+              };
+    case REQUEST_BACKGROUND_SUCCESS:
+      return { url: action.url,
+              loading: false,
+              error: false
+              };
+    case REQUEST_BACKGROUND_FAILED:
+      return  { url: '',
+              loading: false,
+              error: true
+              };
+    default: return state;      
   }
 }
 
@@ -47,5 +52,4 @@ export const rootReducer = combineReducers({
   counterReducer,
   buttonsReducer,
   backgroundReducer,
-  loadingReducer
 })

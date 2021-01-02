@@ -1,4 +1,4 @@
-import { CHANGE_BACKGROUND, DECREMENT, DISABLE_BUTTONS, ENABLE_BUTTONS, HIDE_LOADER, INCREMENT, RESET, SHOW_LOADER } from "./types"
+import { REQUEST_BACKGROUND, DECREMENT, DISABLE_BUTTONS, ENABLE_BUTTONS,  INCREMENT, RESET, REQUEST_BACKGROUND_SUCCESS, REQUEST_BACKGROUND_FAILED, FETCH_BACKGROUND } from "./types"
 
 export function increment() {
   return {
@@ -19,41 +19,31 @@ export function reset() {
       dispatch({ type: RESET })
       dispatch(enableButtons())
     }, 2000)
-   
-  }
-}
-
-export function changeBackground(newBackground){
-  return {
-    type: CHANGE_BACKGROUND,
-    payload: newBackground
   }
 }
 
 export function fetchBackground() {
-  let random = Math.ceil(Math.random() * 100);
-  const api_key = '2f8ea488a21e4fac07f04c7fffc9898d'
-  const url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${api_key}&tags=nature,weather&tag_mode=all&extras=url_h&format=json&nojsoncallback=1`;
-
-  return async dispatch => {
-    dispatch(showLoader())
-    const response = await fetch(url)
-    const json = await response.json()
-    console.log(json.photos.photo[random].url_h)
-    dispatch({type: CHANGE_BACKGROUND, payload: json.photos.photo[random].url_h})
-    dispatch(hideLoader())
+  return {
+    type: FETCH_BACKGROUND
   }
 }
 
-export function showLoader() {
+export function requestBackground() {
   return {
-    type: SHOW_LOADER
+    type: REQUEST_BACKGROUND
   }
 }
 
-export function hideLoader() {
+export function requestBackgroundFailed() {
   return {
-    type: HIDE_LOADER
+    type: REQUEST_BACKGROUND_FAILED
+  }
+}
+
+export function requestBackgroundSuccess(data) {
+  return {
+    type: REQUEST_BACKGROUND_SUCCESS,
+    url: data
   }
 }
 
