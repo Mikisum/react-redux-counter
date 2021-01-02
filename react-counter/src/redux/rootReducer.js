@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
-import { CHANGE_BACKGROUND, DECREMENT, DISABLE_BUTTONS, ENABLE_BUTTONS, INCREMENT, RESET } from "./types"
+import { CHANGE_BACKGROUND, DECREMENT, DISABLE_BUTTONS, ENABLE_BUTTONS, HIDE_LOADER, INCREMENT, RESET, SHOW_LOADER } from "./types"
 
-export function counterReducer(state = 0, action) {
+function counterReducer(state = 0, action) {
   if(action.type === INCREMENT){
     return state + 1
   } else if (action.type === DECREMENT){
@@ -16,7 +16,7 @@ export function counterReducer(state = 0, action) {
 //   disabled: false
 // }
 
-export function buttonsReducer(state = false, action) {
+function buttonsReducer(state = false, action) {
   switch (action.type) {
     case ENABLE_BUTTONS: 
       return state= false;
@@ -26,7 +26,26 @@ export function buttonsReducer(state = false, action) {
   }
 }
 
+function backgroundReducer(state = '', action) {
+  if(action.type === CHANGE_BACKGROUND) {
+    return state = action.payload;
+  }
+  return state
+}
+
+function loadingReducer(state = false, action) {
+  switch (action.type) {
+    case SHOW_LOADER: 
+      return state= true;
+    case HIDE_LOADER: 
+      return state=false  
+    default: return state;
+  }
+}
+
 export const rootReducer = combineReducers({
   counterReducer,
-  buttonsReducer
+  buttonsReducer,
+  backgroundReducer,
+  loadingReducer
 })
