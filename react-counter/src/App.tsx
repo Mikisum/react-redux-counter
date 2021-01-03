@@ -1,14 +1,26 @@
 import './app.css';
 import { connect } from 'react-redux';
 import * as actions from './redux/actions';
+import { AppStateType } from './redux/rootReducer';
 
-function App({counter, disabled, increment, decrement, reset, url, fetchBackground, loading, error }) {
+type MapStatePropsType = {
+  counter: number
+  disabled: boolean
+  increment: () => void
+  decrement: () => void
+  reset: () => void
+  url: string
+  fetchBackground: () => void
+  loading: boolean
+  error: boolean
+}
+
+let App: React.FC<MapStatePropsType> = ({counter, disabled, increment, decrement, reset, url, fetchBackground, loading, error }) => {
 
   return (
-    <div 
-      className="App"
-      style={{backgroundImage:`url(${url})`}}>
-      <div className='filter'>
+    <div className="App">
+      <div className='bg' style={{backgroundImage:`url(${url})`}}></div>  
+      <div className='content'>
         <h2 className='title'>счетчик: {counter}<span id='counter'></span></h2>
         <div className='group-buttons'>
           <button disabled={disabled} onClick={increment}><span>+ ({counter+1})</span></button>
@@ -24,12 +36,11 @@ function App({counter, disabled, increment, decrement, reset, url, fetchBackgrou
                 :<span>Сменить  фон</span>} 
           </button>
         </div>
-      </div>  
-      
+      </div>
     </div>
-  );
+  )
 }
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: AppStateType) => {
   console.log(state)
   return {
     counter: state.counterReducer,

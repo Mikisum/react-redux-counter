@@ -13,7 +13,7 @@ export function decrement() {
 }
 
 export function reset() {
-  return function(dispatch) {
+  return function(dispatch: any) {
     dispatch(disableButtons())
     setTimeout(() => {
       dispatch({ type: RESET })
@@ -40,14 +40,14 @@ export function requestBackgroundFailed() {
   }
 }
 
-export function requestBackgroundSuccess(data) {
+export function requestBackgroundSuccess(data: string) {
   return {
     type: REQUEST_BACKGROUND_SUCCESS,
     url: data
   }
 }
 
-export function enableButtons() {
+export function enableButtons(){
   return {
     type: ENABLE_BUTTONS
   }
