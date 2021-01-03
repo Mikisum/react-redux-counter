@@ -30,7 +30,7 @@ let App: React.FC<MapStatePropsType> = ({counter, disabled, increment, decrement
             style={{width: '170px'}}
             disabled={disabled} onClick={fetchBackground}>
             {loading 
-              ?<span>loading...</span> 
+              ?<span className="loading"></span>
               : error
                 ? <span>Error</span>
                 :<span>Сменить  фон</span>} 

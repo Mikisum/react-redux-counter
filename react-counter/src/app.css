@@ -15,8 +15,13 @@
 }
 
 .content {
-  position: relative;
+  position: absolute;
   z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255,255,255,0.4);
+  padding: 15px;
 }
 
 .title {
@@ -27,6 +32,7 @@
 .group-buttons {
   display: flex;
   justify-content: center;
+  width: 500px;
 }
 
 .group-buttons span {
@@ -35,4 +41,26 @@
 
 .group-buttons button {
   margin: 2%;
+  background: rgb(103 103 103 / 40%);
+  border: none;
+  padding: 10px 5px;
+}
+
+.loading {
+  height: 0;
+  width: 0;
+  padding: 7px;
+  border: 6px solid #ccc;
+  border-right-color: #888;
+  border-radius: 22px;
+  animation: rotate 1s infinite linear;
+  position: absolute;
+  left: 70%;
+  top: 57%;
+}
+
+@keyframes rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
 }

@@ -29,7 +29,7 @@ export type InitialBackgroundType = {
 }
 
 let initialBackgroundState: InitialBackgroundType = {
-  url: 'https://live.staticflickr.com/65535/50757525423_f0886331e0_h.jpg',
+  url: 'https://via.placeholder.com/600/a19891',
   loading: false,
   error: false
 }

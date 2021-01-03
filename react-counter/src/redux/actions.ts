@@ -18,7 +18,7 @@ export function reset() {
     setTimeout(() => {
       dispatch({ type: RESET })
       dispatch(enableButtons())
-    }, 2000)
+    }, 1000)
   }
 }
 
