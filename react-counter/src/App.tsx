@@ -21,19 +21,18 @@ let App: React.FC<MapStatePropsType> = ({counter, disabled, increment, decrement
     <div className="App">
       <div className='bg' style={{backgroundImage:`url(${url})`}}></div>  
       <div className='content'>
-        <h2 className='title'>счетчик: {counter}<span id='counter'></span></h2>
+        <h2 className='title'>counter: {counter}<span id='counter'></span></h2>
         <div className='group-buttons'>
           <button disabled={disabled} onClick={increment}><span>+ ({counter+1})</span></button>
           <button disabled={disabled} onClick={decrement}><span>- ({counter-1})</span></button>
-          <button disabled={disabled} onClick={reset}><span>сброс</span></button>
+          <button disabled={disabled} onClick={reset}><span>reset (0)</span></button>
           <button 
-            style={{width: '170px'}}
             disabled={disabled} onClick={fetchBackground}>
             {loading 
               ?<span className="loading"></span>
               : error
                 ? <span>Error</span>
-                :<span>Сменить  фон</span>} 
+                :<span>theme</span>} 
           </button>
         </div>
       </div>
