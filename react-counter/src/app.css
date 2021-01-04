@@ -32,7 +32,7 @@
 .group-buttons {
   display: flex;
   justify-content: center;
-  width: 500px;
+  width: 400px;
 }
 
 .group-buttons span {
@@ -46,6 +46,10 @@
   padding: 10px 5px;
 }
 
+button:last-child{
+  width: 100px;
+}
+
 .loading {
   height: 0;
   width: 0;
@@ -55,7 +59,7 @@
   border-radius: 22px;
   animation: rotate 1s infinite linear;
   position: absolute;
-  left: 70%;
+  left: 78%;
   top: 57%;
 }
 
